@@ -11,6 +11,11 @@ let numbers = document.querySelectorAll('.number');
 let operators = document.querySelectorAll('.operator');
 let displayPrev = document.querySelector('#display-prev');
 let displayCurrent = document.querySelector('#display-current')
+let clearDisplayBtn = document.querySelector('#clearDisplay')
+clearDisplayBtn.addEventListener('click', function(){
+    clearDisplay()
+});
+
 displayCurrent.textContent = ' '
 displayPrev.textContent = ' '
 numbers.forEach((number) => number.addEventListener('click', function(e){
@@ -22,6 +27,14 @@ operators.forEach((operator) => operator.addEventListener('click', function(e){
     handleOperator(e.target.textContent) 
     
 }))
+
+function clearDisplay(){
+    console.log('clear display')
+    currentNum = '';
+    prevNum = '';
+    displayCurrent.textContent = '';
+    displayPrev.textContent = '';
+}
 
 function handleNumber(num) {
     currentNum += num
@@ -35,6 +48,11 @@ function handleOperator(op) {
     displayPrev.textContent = prevNum + " " + currentOperator
     currentNum = ''
    
+}
+
+
+function addPoint(){
+    currentNum += ".";
 }
 function calculate () {
     currentNum = Number(currentNum);

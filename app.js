@@ -1,49 +1,51 @@
-let num1;
-let num2;
-let operator;
-const operators = ["/", "*", "-", "+"];
-let result;
-const calcInputs = document.querySelector('#calc-inputs');
-calcInputs.addEventListener('click', function(e) {
-    if(num1 !== ''){
-        num1 = e.target.id;
-    } else if(num2 !== ''){
-        num2 = e.target.id;
-    }
-   
-    console.log(num1);
+let currentNum = '';
+let prevNum = '';
+let currentOperator = '';
+let result = '';
 
-    console.log(num2);
+let equal = document.getElementById('equal');
+equal.addEventListener('click', function(){
+    calculate ()
 })
+let numbers = document.querySelectorAll('.number');
+let operators = document.querySelectorAll('.operator');
 
+numbers.forEach((number) => number.addEventListener('click', function(e){
+    handleNumber(e.target.textContent)
+    
+}));
 
+operators.forEach((operator) => operator.addEventListener('click', function(e){
+    handleOperator(e.target.textContent) 
+    
+}))
 
-function operate (num1, operators, num2) {
-    if (operators === "+") {
-        add(num1, num2)
-    } else if (operators === "-"){
-        subtract(num1, num2)
-    } else if (operators === "*") {
-        multiply(num1, num2)
-    } else if (operators === "/") {
-        divide(num1, num2)
+function handleNumber(num) {
+    currentNum += num
+    console.log(currentNum)
+}
+
+function handleOperator(op) {
+    currentOperator = op
+    prevNum = currentNum
+    currentNum = ''
+   
+}
+function calculate () {
+    currentNum = Number(currentNum);
+    prevNum = Number(prevNum);
+    if(currentOperator === '+') {
+        currentNum += prevNum
+        console.log(currentNum)
+    }else if(currentOperator === '-') {
+        currentNum = prevNum - currentNum
+        console.log(currentNum)
+    }else if(currentOperator === '*') {
+        currentNum = currentNum * prevNum
+        console.log(currentNum)
+    }else if(currentOperator === '/') {
+        currentNum = currentNum / prevNum
+        console.log(currentNum)
     }
-};
-function add(num1, num2){
-    console.log(num1 + num2)
-return num1 + num2;
-}
-function subtract(num1, num2){
-    console.log(num1 - num2)
-    return num1 - num2;
-}
-function multiply(num1, num2){
-    console.log(num1 * num2)
-    return num1 * num2;
-}
-function divide(num1, num2){
-    console.log(num1 / num2)
-    return num1 / num2;
 }
 
-operate()

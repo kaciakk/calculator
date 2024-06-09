@@ -9,7 +9,10 @@ equal.addEventListener('click', function(){
 })
 let numbers = document.querySelectorAll('.number');
 let operators = document.querySelectorAll('.operator');
-
+let displayPrev = document.querySelector('#display-prev');
+let displayCurrent = document.querySelector('#display-current')
+displayCurrent.textContent = ' '
+displayPrev.textContent = ' '
 numbers.forEach((number) => number.addEventListener('click', function(e){
     handleNumber(e.target.textContent)
     
@@ -22,12 +25,14 @@ operators.forEach((operator) => operator.addEventListener('click', function(e){
 
 function handleNumber(num) {
     currentNum += num
+    displayCurrent.textContent = currentNum
     console.log(currentNum)
 }
 
 function handleOperator(op) {
     currentOperator = op
     prevNum = currentNum
+    displayPrev.textContent = prevNum + " " + currentOperator
     currentNum = ''
    
 }
@@ -35,16 +40,24 @@ function calculate () {
     currentNum = Number(currentNum);
     prevNum = Number(prevNum);
     if(currentOperator === '+') {
+        displayPrev.textContent = prevNum + " " + currentOperator + " " + currentNum + " ="
         currentNum += prevNum
+        displayCurrent.textContent = currentNum
         console.log(currentNum)
     }else if(currentOperator === '-') {
+        displayPrev.textContent = prevNum + " " + currentOperator + " " + currentNum + " ="
         currentNum = prevNum - currentNum
+        displayCurrent.textContent = currentNum
         console.log(currentNum)
     }else if(currentOperator === '*') {
+        displayPrev.textContent = prevNum + " " + currentOperator + " " + currentNum + " ="
         currentNum = currentNum * prevNum
+        displayCurrent.textContent = currentNum
         console.log(currentNum)
     }else if(currentOperator === '/') {
+        displayPrev.textContent = prevNum + " " + currentOperator + " " + currentNum + " ="
         currentNum = currentNum / prevNum
+        displayCurrent.textContent = currentNum
         console.log(currentNum)
     }
 }
